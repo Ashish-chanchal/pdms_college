@@ -4,6 +4,8 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_storage/firebase_storage.dart";
 import "package:flutter/foundation.dart";
+import "package:pdms/consts/consts.dart";
+import "package:pdms/views/login_view/patient_login_view.dart";
 
 final FirebaseStorage _storage = FirebaseStorage.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -78,5 +80,9 @@ class StoreData {
 
     userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email, password: password);
+  }
+   signout() async {
+    await FirebaseAuth.instance.signOut();
+    Get.off(() => const PatientLoginView());
   }
 }

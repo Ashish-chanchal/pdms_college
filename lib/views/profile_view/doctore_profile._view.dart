@@ -21,7 +21,7 @@ class _DoctoreProfileViewState extends State<DoctoreProfileView> {
           backgroundColor: AppColors.primaryColor,
           automaticallyImplyLeading: false,
           title: AppStyles.normal(
-              title: "Profile User",
+              title: "Your Profile",
               size: AppSize.size22,
               color: AppColors.whiteColor),
           actions: [

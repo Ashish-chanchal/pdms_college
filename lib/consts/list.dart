@@ -1,26 +1,14 @@
 import 'package:pdms/consts/consts.dart';
 
-class ChatMessage {
-  String messageContent;
-  String messageType;
-  ChatMessage({required this.messageContent, required this.messageType});
-}class Doctor {
+
+class Doctor {
   String name;
   String specialty;
 
   Doctor(this.name, this.specialty);
 }
 
-List<ChatMessage> messages = [
-  ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-  ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-      messageType: "sender"),
-  ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Is there any thing wrong?", messageType: "sender"),
-];
+
 
 var iconlist = [
   AppIcons.body,

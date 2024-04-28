@@ -1,7 +1,8 @@
-import 'package:pdms/chat_view/chat_view.dart';
+
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/views/appointment_view/appointment_view.dart';
 import 'package:pdms/views/category_view/category_view.dart';
+import 'package:pdms/views/chat_view/chat_view.dart';
 import 'package:pdms/views/home_view/home_patient_view.dart';
 
 import 'package:pdms/views/profile_view/patient_profile_view.dart';

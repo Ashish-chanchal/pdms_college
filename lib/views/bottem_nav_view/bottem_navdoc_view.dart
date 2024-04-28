@@ -1,5 +1,6 @@
-import 'package:pdms/chat_view/chat_view.dart';
+
 import 'package:pdms/consts/consts.dart';
+import 'package:pdms/views/chat_view/chat_view.dart';
 
 
 import 'package:pdms/views/home_view/home_doctor_view.dart';
