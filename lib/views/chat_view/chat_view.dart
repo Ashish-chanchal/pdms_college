@@ -132,7 +132,6 @@ bool containsHealthKeywords(String text) {
     'back pain',
     'obesity',
     'depression',
-   
   ];
   
   // Check if any of the keywords are present in the text

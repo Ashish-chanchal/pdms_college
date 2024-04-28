@@ -157,11 +157,11 @@ class HomePatientView extends StatelessWidget {
                                         ),
                                         5.heightBox,
                                         AppStyles.normal(
-                                          title: "Doctor Name",
+                                          title: data[index]['name'],
                                           size: AppSize.size14,
                                         ),
                                         AppStyles.normal(
-                                            title: "Doctor Speciality",
+                                            title: data[index]['category'],
                                             size: AppSize.size14,
                                             color: Colors.black54)
                                       ]),
