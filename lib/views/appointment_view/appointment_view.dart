@@ -34,7 +34,7 @@ class AppointmentView extends StatelessWidget {
                         width: double.infinity,
                         child: GestureDetector(
                            onTap: (){
-                            Get.to(()=>const DoctoreProfileptView(isbooked: true,));
+                            //Get.to(()=>const DoctoreProfileptView(isbooked: true,));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,

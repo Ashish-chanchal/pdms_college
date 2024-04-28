@@ -85,4 +85,45 @@ class StoreData {
     await FirebaseAuth.instance.signOut();
     Get.off(() => const PatientLoginView());
   }
+  Future<Patient> getPatientData() async {
+  DocumentSnapshot<Map<String, dynamic>> snapshot =
+      await FirebaseFirestore.instance.collection('users').doc(userCredential!.user!.uid).get();
+
+  Map<String, dynamic> data = snapshot.data()!;
+  return Patient.fromJson(data);
+}
+}
+class Patient {
+  final String address;
+  final String age;
+  final String email;
+  final String gender;
+  final String imageUrl;
+  final String name;
+  final String phone;
+  final String userId;
+
+  Patient({
+    required this.address,
+    required this.age,
+    required this.email,
+    required this.gender,
+    required this.imageUrl,
+    required this.name,
+    required this.phone,
+    required this.userId,
+  });
+
+  factory Patient.fromJson(Map<String, dynamic> json) {
+    return Patient(
+      address: json['address'],
+      age: json['age'],
+      email: json['email'],
+      gender: json['gender'],
+      imageUrl: json['imageUrl'],
+      name: json['name'],
+      phone: json['phone'],
+      userId: json['userId'],
+    );
+  }
 }

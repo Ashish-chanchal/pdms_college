@@ -1,4 +1,3 @@
-
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/resources/auth_doctor.dart';
@@ -37,7 +36,7 @@ class _DoctoreProfileViewState extends State<DoctoreProfileView> {
                     color: AppColors.whiteColor,
                   ), // Your logout icon
                   onPressed: () {
-                    StoreDocData().signout();
+                  StoreDocData().signout();
                   },
                 ),
               ],
@@ -66,17 +65,17 @@ class _DoctoreProfileViewState extends State<DoctoreProfileView> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                            width: 150,
-                            height: 150,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.network(
-                              docdata.imageUrl,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                                width: 150,
+                                height: 150,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.network(
+                                  docdata.imageUrl,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                               10.heightBox,
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,

@@ -1,3 +1,4 @@
+import 'dart:math';
 
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
@@ -83,13 +84,16 @@ class _DoctorLoginViewState extends State<DoctorLoginView> {
                   10.heightBox,
                   CustomButton(
                       onTap: () {
-                        StoreDocData().loginUser(
+                        if (emailController.text.isEmpty ||
+                            passwordController.text.isEmpty) {
+                          Get.snackbar("Error", "Please fill all the fields");
+                          return;
+                        } else {
+                          StoreDocData().loginUser(
                             email: emailController.text,
                             password: passwordController.text);
-
+                        }
                         if (userCredential != null) {
-                       
-                        
                           Get.offAll(() => const BottomNavDocView());
                         } else {
                           Get.snackbar("Error", "Invalid Email or Password");

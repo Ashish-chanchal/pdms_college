@@ -22,7 +22,7 @@ class DoctorsView extends StatelessWidget {
                 ),itemCount: doctors.length, itemBuilder: (BuildContext context,int index){
                   return GestureDetector(
                           onTap: () {
-                            Get.to(() => const DoctoreProfileptView());
+                           // Get.to(() => const DoctoreProfileptView());
                           },
                           child: Container(
                             margin: const EdgeInsets.only(right: 8),

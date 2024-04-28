@@ -56,7 +56,7 @@ class CategoryDetailsView extends StatelessWidget {
                           
                         ]),
                       ).onTap(() {
-                        Get.to(() => const DoctoreProfileptView());
+                       // Get.to(() => const DoctoreProfileptView());
                       });
                     }),
               ));

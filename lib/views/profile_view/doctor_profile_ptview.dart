@@ -1,11 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/views/bookappointment_view/bookappointment_view.dart';
 
 class DoctoreProfileptView extends StatelessWidget {
   final bool isbooked;
+   final DocumentSnapshot doc;
 
-  const DoctoreProfileptView({super.key, this.isbooked = false});
+  const DoctoreProfileptView({super.key, this.isbooked = false, required this.doc});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class DoctoreProfileptView extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColors.primaryColor,
           title: AppStyles.normal(
-              title: "Dr Name",
+              title: "Dr ${doc['name']}",
               size: AppSize.size22,
               color: AppColors.whiteColor),
         ),
@@ -29,12 +31,18 @@ class DoctoreProfileptView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Image.asset(
-                      AppAssets.profile,
-                      height: 150,
-                      width: 150,
-                      fit: BoxFit.cover,
-                    ),
+                     Container(
+                                width: 150,
+                                height: 150,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.network(
+                                  doc['imageUrl'],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                     10.heightBox,
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -44,7 +52,7 @@ class DoctoreProfileptView extends StatelessWidget {
                             size: AppSize.size18,
                             color: AppColors.primaryColor),
                         AppStyles.normal(
-                            title: "Doctor Name",
+                            title: doc['name'],
                             size: AppSize.size18,
                             color: AppColors.primaryColor),
                         AppStyles.bold(
@@ -52,7 +60,7 @@ class DoctoreProfileptView extends StatelessWidget {
                             size: AppSize.size16,
                             color: AppColors.primaryColor),
                         AppStyles.normal(
-                            title: "Doctor Speciality",
+                            title: doc['category'],
                             size: AppSize.size16,
                             color: AppColors.primaryColor),
                       ],
@@ -67,7 +75,7 @@ class DoctoreProfileptView extends StatelessWidget {
                       size: AppSize.size14,
                       color: AppColors.textColor),
                   subtitle: AppStyles.normal(
-                    title: "Phone Number",
+                    title: doc['phone'],
                     size: AppSize.size12,
                     color: AppColors.textColor.withOpacity(0.5),
                   ),
@@ -91,7 +99,7 @@ class DoctoreProfileptView extends StatelessWidget {
                       size: AppSize.size14,
                       color: AppColors.textColor),
                   subtitle: AppStyles.normal(
-                    title: "Email",
+                    title: doc['email'],
                     size: AppSize.size12,
                     color: AppColors.textColor.withOpacity(0.5),
                   ),
@@ -115,7 +123,7 @@ class DoctoreProfileptView extends StatelessWidget {
                       size: AppSize.size14,
                       color: AppColors.textColor),
                   subtitle: AppStyles.normal(
-                    title: "Location",
+                    title: doc['clinicadd'],
                     size: AppSize.size12,
                     color: AppColors.textColor.withOpacity(0.5),
                   ),

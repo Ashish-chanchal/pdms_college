@@ -6,6 +6,7 @@ import "package:firebase_storage/firebase_storage.dart";
 import "package:flutter/foundation.dart";
 import "package:pdms/consts/consts.dart";
 import "package:pdms/views/login_view/doctor_login_view.dart";
+import "package:pdms/views/login_view/login_view.dart";
 
 final FirebaseStorage _storage = FirebaseStorage.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -88,7 +89,7 @@ class StoreDocData {
 
   signout() async {
     await FirebaseAuth.instance.signOut();
-    Get.off(() => const DoctorLoginView());
+    Get.off(() => const LoginView());
   }
 
   Future<Clinic> getClinicData() async {

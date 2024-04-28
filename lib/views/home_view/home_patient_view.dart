@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
+import 'package:pdms/resources/home_controller.dart';
 import 'package:pdms/views/category_view/category_detail_view.dart';
 import 'package:pdms/views/category_view/category_view.dart';
 import 'package:pdms/views/doctors_view/doctors_view.dart';
@@ -70,7 +72,8 @@ class HomePatientView extends StatelessWidget {
                 children: List.generate(iconlist.length - 3, (index) {
                   return GestureDetector(
                     onTap: () {
-                      Get.to(()=>CategoryDetailsView(catName: categorylist[index]));
+                      Get.to(() =>
+                          CategoryDetailsView(catName: categorylist[index]));
                     },
                     child: Column(children: [
                       Image.asset(
@@ -109,51 +112,64 @@ class HomePatientView extends StatelessWidget {
             ),
             10.heightBox,
             Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SizedBox(
-                  height: 150,
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: 5,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Get.to(() => const DoctoreProfileptView());
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 8),
-                            clipBehavior: Clip.hardEdge,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: AppColors.bgDarkCokor),
+                padding: const EdgeInsets.all(10.0),
+                child: FutureBuilder<QuerySnapshot>(
+                    future: HomeController().getDoctorList(),
+                    builder: (BuildContext cpntext,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        var data = snapshot.data?.docs;
+                        return SizedBox(
                             height: 150,
-                            width: 150,
-                            child: Column(children: [
-                              Container(
-                                width: 150,
-                                alignment: Alignment.center,
-                                color: AppColors.primaryColor,
-                                child: Image.asset(
-                                  AppAssets.onboarding1,
-                                  width: 100,
-                                  height: 100,
-                                ),
-                              ),
-                              5.heightBox,
-                              AppStyles.normal(
-                                title: "Doctor Name",
-                                size: AppSize.size14,
-                              ),
-                              AppStyles.normal(
-                                  title: "Doctor Speciality",
-                                  size: AppSize.size14,
-                                  color: Colors.black54)
-                            ]),
-                          ),
-                        );
-                      })),
-            )
+                            child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: data?.length??0,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.to(
+                                          () =>  DoctoreProfileptView(doc: data[index]));
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.only(right: 8),
+                                      clipBehavior: Clip.hardEdge,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: AppColors.bgDarkCokor),
+                                      height: 150,
+                                      width: 150,
+                                      child: Column(children: [
+                                        Container(
+                                          width: 150,
+                                          alignment: Alignment.center,
+                                          color: AppColors.primaryColor,
+                                          child: Image.network(
+                                            data![index]['imageUrl'],
+                                            width: 100,
+                                            height: 100,
+                                            fit: BoxFit.cover,
+                                            
+                                          ),
+                                        ),
+                                        5.heightBox,
+                                        AppStyles.normal(
+                                          title: "Doctor Name",
+                                          size: AppSize.size14,
+                                        ),
+                                        AppStyles.normal(
+                                            title: "Doctor Speciality",
+                                            size: AppSize.size14,
+                                            color: Colors.black54)
+                                      ]),
+                                    ),
+                                  );
+                                }));
+                      }
+                    }))
           ],
         ),
       ),
