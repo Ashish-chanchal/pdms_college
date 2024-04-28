@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
@@ -33,8 +33,8 @@ class BookAppointmentView extends StatelessWidget {
                     alignment: Alignment.center,
                     child: CustomButton(
                       onTap: () {
-                        Get.snackbar("Appointment Booked", "Your Appointment has been booked successfully", snackPosition: SnackPosition.BOTTOM, backgroundColor: AppColors.primaryColor, colorText: AppColors.whiteColor, margin: EdgeInsets.all(20), borderRadius: 10, duration: Duration(seconds: 5));
-                       // Get.to(() => const App());
+                        Get.snackbar("Appointment Booked", "Your Appointment has been booked successfully", snackPosition: SnackPosition.BOTTOM, backgroundColor: AppColors.primaryColor, colorText: AppColors.whiteColor, margin: const EdgeInsets.all(20), borderRadius: 10, duration: const Duration(seconds: 3));
+                       
                       },
                       buttontext: "Book Appointment", widt: 200,
                     )),

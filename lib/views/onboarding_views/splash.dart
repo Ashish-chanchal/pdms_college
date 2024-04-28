@@ -31,34 +31,36 @@ Widget build(BuildContext context) {
 	return Scaffold(
     
       backgroundColor: AppColors.primaryColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          
-        Center(child: Image.asset(AppAssets.login, height: 400, width: 400 )),
-        Container(
-          width: double.infinity,
-          height: 442,
-          decoration: BoxDecoration(
-            color: AppColors.bgColor,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(40),
-              topRight: Radius.circular(40),
-            ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
             
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Column(
-              children: [
-                 CircularProgressIndicator(color: AppColors.primaryColor,),
-                Image.asset(AppAssets.logo, height: 300, width: 300 ),
-              ],
+          Center(child: Image.asset(AppAssets.login, height: 400, width: 400 )),
+          Container(
+            width: double.infinity,
+            height: 442,
+            decoration: BoxDecoration(
+              color: AppColors.bgColor,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
+              
             ),
-          ),
-        )
-        
-      ]),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Column(
+                children: [
+                   CircularProgressIndicator(color: AppColors.primaryColor,),
+                  Image.asset(AppAssets.logo, height: 300, width: 300 ),
+                ],
+              ),
+            ),
+          )
+          
+        ]),
+      ),
     ); 
 } 
 } 

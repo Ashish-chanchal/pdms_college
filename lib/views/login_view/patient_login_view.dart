@@ -2,11 +2,17 @@ import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/views/bottem_nav_view/bottem_navpat_view.dart';
+import 'package:pdms/views/forget_password_view/forget_password_view.dart';
 import 'package:pdms/views/signup_view/patient_signup_view.dart';
 
-class PatientLoginView extends StatelessWidget {
+class PatientLoginView extends StatefulWidget {
   const PatientLoginView({super.key});
 
+  @override
+  State<PatientLoginView> createState() => _PatientLoginViewState();
+}
+
+class _PatientLoginViewState extends State<PatientLoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +60,9 @@ class PatientLoginView extends StatelessWidget {
                   ),
                   10.heightBox,
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => const ForgetPasswordView());
+                    },
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: AppStyles.normal(

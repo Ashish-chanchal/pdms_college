@@ -8,7 +8,10 @@ class AppAssets {
       loginsignup = 'assets/images/loginsignup.png',
       doclogo = 'assets/images/doclogo.png',
       patientlogo = 'assets/images/patientlogo.png',
+      sad = 'assets/images/sad.png',
+      happy = 'assets/images/happy.png',
       profile = 'assets/images/profile.png';
+
 }
 class AppIcons {
   static const body = 'assets/icons/body.png',
