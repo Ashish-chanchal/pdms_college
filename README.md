@@ -1,8 +1,7 @@
 # pdms
 
 CareLink 
-![Screenshot_1713105553](https://github.com/Ashish-chanchal/pdms_college/assets/86229520/4f21c138-4fa5-4e5c-87e3-88b715a60c1d)
-![Screenshot_1713105547](https://github.com/Ashish-chanchal/pdms_college/assets/86229520/f7e04e27-5d57-4bc0-851d-2f4bd565a35e)
+![Screenshot_1713105553](https://github.com/Ashish-chanchal/pdms_college/assets/86229520/4f21c138-4fa5-4e5c-87e3-88b715a60c1d) ![Screenshot_1713105547](https://github.com/Ashish-chanchal/pdms_college/assets/86229520/f7e04e27-5d57-4bc0-851d-2f4bd565a35e)
 ![Screenshot_1713105679](https://github.com/Ashish-chanchal/pdms_college/assets/86229520/9a5a6c70-110e-4228-860f-a9c009ce70e1)
 ![Screenshot_1713105671](https://github.com/Ashish-chanchal/pdms_college/assets/86229520/68880d84-00f7-4ddd-96fd-e35072731cbd)
 ![Screenshot_1713105662](https://github.com/Ashish-chanchal/pdms_college/assets/86229520/c55f0c52-4ce1-49b9-8710-774c86fcb919)
