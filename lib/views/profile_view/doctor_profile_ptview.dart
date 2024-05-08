@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/consts/consts.dart';
+import 'package:pdms/resources/store_appointment.dart';
 import 'package:pdms/views/bookappointment_view/bookappointment_view.dart';
 
 class DoctoreProfileptView extends StatelessWidget {
@@ -177,7 +178,8 @@ class DoctoreProfileptView extends StatelessWidget {
                     child: CustomButton(
                       onTap: () {
                         if (!isbooked){
-                        Get.to(() => const BookAppointmentView());
+                          print(doc['drId']);
+                        Get.to(() =>  BookAppointmentView(docUid:doc['userId']));
                         }
                         else{
                           Get.snackbar("Already Booked", "You have already booked an appointment", snackPosition: SnackPosition.BOTTOM, backgroundColor: AppColors.primaryColor, colorText: AppColors.whiteColor, margin: const EdgeInsets.all(20), borderRadius: 10, duration: const Duration(seconds: 5));

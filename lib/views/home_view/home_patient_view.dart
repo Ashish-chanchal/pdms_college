@@ -115,17 +115,25 @@ class HomePatientView extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: FutureBuilder<QuerySnapshot>(
                     future: HomeController().getDoctorList(),
-                    builder: (BuildContext cpntext,
+                    builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
                         var data = snapshot.data?.docs;
+                        int? length = data?.length;
+                        int? result = 0;
+                        if (length != null&& length > 5){
+                           result = length ~/ 2; // Using integer division operator ~/ to get integer result
+
+                        } else {
+                          result=null;
+                        }
                         return SizedBox(
                             height: 150,
                             child: ListView.builder(
                                 physics: const BouncingScrollPhysics(),
-                                itemCount: data?.length??0,
+                                itemCount: result??length,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (BuildContext context, int index) {
                                   return GestureDetector(
