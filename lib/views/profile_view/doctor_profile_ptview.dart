@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/consts/consts.dart';
-import 'package:pdms/resources/store_appointment.dart';
+
 import 'package:pdms/views/bookappointment_view/bookappointment_view.dart';
 
 class DoctoreProfileptView extends StatelessWidget {

@@ -1,8 +1,8 @@
 
-import 'package:pdms/views/profile_view/doctor_profile_ptview.dart';
-
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pdms/consts/consts.dart';
+import 'package:pdms/resources/home_controller.dart';
+import 'package:pdms/views/profile_view/doctor_profile_ptview.dart';
 
 class CategoryDetailsView extends StatelessWidget {
   final String catName;
@@ -21,44 +21,74 @@ class CategoryDetailsView extends StatelessWidget {
         ),
         body:  Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisExtent: 170,
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 8),
-                    itemCount: 5,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        margin: const EdgeInsets.only(right: 8),
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColors.bgDarkCokor),
-                        height: 150,
-                        width: 150,
-                        child: Column(children: [
-                          Container(
-                            alignment: Alignment.center,
-                            color: AppColors.primaryColor,
-                            child: Image.asset(
-                              AppAssets.onboarding3,
-                              width: 70,
-                              height: 120,
+                child: FutureBuilder<QuerySnapshot>(
+                  future: HomeController().getCategory(catName),
+                  builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot){
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    else if(snapshot.data!.docs.isEmpty){
+                      return const Center(child: Text("No Doctors"));
+                    }
+                    var data = snapshot.data?.docs;
+                    return GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 4.0,
+                        mainAxisSpacing: 4.0,
+                      ),
+                      itemCount: data?.length??0,
+                      itemBuilder: (BuildContext context, int index){
+                        return GestureDetector(
+                          onTap: (){
+                            Get.to(() => DoctoreProfileptView(doc: data[index]));
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 8),
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: AppColors.bgDarkCokor
+                            ),
+                            height: 150,
+                            width: 150,
+                            child: Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color: AppColors.primaryColor
+                                  ),
+                                  width: 150,
+                                  alignment: Alignment.center,
+                                  child: Image.network(
+                                    data![index]['imageUrl'],
+                                    width: 100,
+                                    height: 120,
+                                  ),
+                                ),
+                                10.heightBox,
+                                AppStyles.bold(
+                                  title: data[index]['name'],
+                                  size: AppSize.size18,
+                                  color: AppColors.primaryColor
+                                ),
+                                5.heightBox,
+                                AppStyles.normal(
+                                  title: data[index]['category'],
+                                  size: AppSize.size16,
+                                  color: AppColors.primaryColor
+                                )
+                              ],
                             ),
                           ),
-                          5.heightBox,
-                          AppStyles.normal(
-                            title: "Doctor Name",
-                            size: AppSize.size14,
-                          ),
-                          
-                        ]),
-                      ).onTap(() {
-                       // Get.to(() => const DoctoreProfileptView());
-                      });
-                    }),
+                        );
+                      }
+                    );
+
+                  },
+                   
+                ),
               ));
             }
           }

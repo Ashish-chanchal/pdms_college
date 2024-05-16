@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
-import 'package:pdms/resources/auth_doctor.dart';
+
 
 import '../../resources/store_appointment.dart';
 

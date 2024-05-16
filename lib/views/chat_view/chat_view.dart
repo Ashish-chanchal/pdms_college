@@ -27,8 +27,8 @@ class _ChatViewState extends State<ChatView> {
   final ChatUser _gptChatUser =
       ChatUser(id: '2', firstName: 'CareLink', lastName: 'GPT' , profileImage: "https://cdn.pfizer.com/pfizercom/screen_shot_2020-02-20_at_1.06.10_pm.png",);
 
-  List<ChatMessage> _messages = <ChatMessage>[];
-  List<ChatUser> _typingUsers = <ChatUser>[];
+  final List<ChatMessage> _messages = <ChatMessage>[];
+  final List<ChatUser> _typingUsers = <ChatUser>[];
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class _ChatViewState extends State<ChatView> {
     _messages.insert(0, m);
     _typingUsers.add(_gptChatUser);
   });
-  List  <Messages> _messagesHistory = _messages.reversed.map((m) {
+  List  <Messages> messagesHistory = _messages.reversed.map((m) {
     if (m.user == _currentUser) {
       return Messages(role: Role.user, content: m.text);
     } else {
@@ -72,7 +72,7 @@ class _ChatViewState extends State<ChatView> {
 
   final request = ChatCompleteText(
     model: GptTurbo0301ChatModel(),
-    messages: _messagesHistory,
+    messages: messagesHistory,
     maxToken: 200,
   );
   final response = await _openAI.onChatCompletion(request: request);

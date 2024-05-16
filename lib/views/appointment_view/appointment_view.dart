@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/resources/store_appointment.dart';
 
-import 'package:pdms/views/profile_view/doctor_profile_ptview.dart';
+
 
 class AppointmentView extends StatelessWidget {
   const AppointmentView({super.key});
@@ -25,7 +25,7 @@ class AppointmentView extends StatelessWidget {
             child: SingleChildScrollView(
               child: FutureBuilder<QuerySnapshot>(future: StoreAppointment().getAppointmentList(), builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
                 if(snapshot.connectionState == ConnectionState.waiting){
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 else if(snapshot.hasError){
                   return Center(child: Text("Error: ${snapshot.error}"));

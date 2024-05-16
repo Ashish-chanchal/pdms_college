@@ -21,6 +21,9 @@ class DoctorsView extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
+                else if (snapshot.data!.docs.isEmpty) {
+                  return const Center(child: Text("No Appointments"));
+                }
                 var data = snapshot.data?.docs;
                 return GridView.builder(
                     gridDelegate:
@@ -33,7 +36,7 @@ class DoctorsView extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                           Get.to(() =>  DoctoreProfileptView(doc: data![index]));
+                           Get.to(() =>  DoctoreProfileptView(doc: data[index]));
                         },
                         child: Container(
                           margin: const EdgeInsets.only(right: 8),
