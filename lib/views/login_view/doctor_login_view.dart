@@ -82,21 +82,23 @@ class _DoctorLoginViewState extends State<DoctorLoginView> {
                   ),
                   10.heightBox,
                   CustomButton(
-                      onTap: () {
+                      onTap: () async {
                         if (emailController.text.isEmpty ||
                             passwordController.text.isEmpty) {
                           Get.snackbar("Error", "Please fill all the fields");
                           return;
                         } else {
-                          StoreDocData().loginUser(
+                           try {
+                            await StoreDocData().loginUser(
                             email: emailController.text,
                             password: passwordController.text);
+                            Get.offAll(() => const BottomNavDocView());
                         }
-                        if (userCredential != null) {
-                          Get.offAll(() => const BottomNavDocView());
-                        } else {
-                          Get.snackbar("Error", "Invalid Email or Password");
+                        catch (e) {
+                           Get.snackbar("Error", "Invalid Email or Password");
                         }
+                        }
+                        
                       },
                       buttontext: "Login"),
                   10.heightBox,
@@ -105,12 +107,6 @@ class _DoctorLoginViewState extends State<DoctorLoginView> {
                     Text("OR"),
                     Expanded(child: Divider()),
                   ]),
-                  10.heightBox,
-                  CustomButton(
-                    onTap: () {},
-                    buttontext: "Login with Google",
-                    widt: 200,
-                  ),
                   10.heightBox,
                   CustomButton(
                     onTap: () {

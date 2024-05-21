@@ -30,7 +30,6 @@ class StoreDocData {
 
   Future<String> signupdoctor(
       {required String name,
-      required String exp,
       required String gender,
       required String clinicadd,
       required String drId,
@@ -38,13 +37,15 @@ class StoreDocData {
       required String email,
       required String password,
       required String phone,
+      required String about,
+      required String clinicTiming,
       required Uint8List file}) async {
     userCredential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
     String imageUrl = await uploadImageToStorage(name, file);
 
-    String status = await storeUserData(userCredential!.user!.uid, name, exp,
-        gender, clinicadd, drId, category, email, phone, imageUrl);
+    String status = await storeUserData(userCredential!.user!.uid, name, gender,
+        clinicadd, drId, category, email, phone, about, clinicTiming, imageUrl);
 
     return status;
   }
@@ -52,20 +53,20 @@ class StoreDocData {
   Future<String> storeUserData(
       String uid,
       String name,
-      String exp,
       String gender,
       String clinicadd,
       String drId,
       String category,
       String email,
       String phone,
+      String about,
+      String clinicTiming,
       String imageUrl) async {
     try {
       var store = _firestore.collection('doctor').doc(uid);
 
       await store.set({
         'name': name,
-        'experience': exp,
         'gender': gender,
         'clinicadd': clinicadd,
         'drId': drId,
@@ -73,6 +74,8 @@ class StoreDocData {
         'email': email,
         'phone': phone,
         'imageUrl': imageUrl,
+        'about': about,
+        'clinicTiming': clinicTiming,
         'userId': FirebaseAuth.instance.currentUser!.uid,
       });
     } catch (e) {
@@ -93,12 +96,15 @@ class StoreDocData {
   }
 
   Future<Clinic> getClinicData() async {
-  DocumentSnapshot<Map<String, dynamic>> snapshot =
-      await FirebaseFirestore.instance.collection('doctor').doc(userCredential!.user!.uid).get();
+    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('doctor')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
 
-  Map<String, dynamic> data = snapshot.data()!;
-  return Clinic.fromJson(data);
-}
+    Map<String, dynamic> data = snapshot.data()!;
+    return Clinic.fromJson(data);
+  }
 }
 
 class Clinic {
@@ -106,7 +112,8 @@ class Clinic {
   final String clinicAddress;
   final String doctorId;
   final String email;
-  final String experience;
+  final String about;
+  final String clinicTiming;
   final String gender;
   final String imageUrl;
   final String name;
@@ -118,7 +125,8 @@ class Clinic {
     required this.clinicAddress,
     required this.doctorId,
     required this.email,
-    required this.experience,
+    required this.about,
+    required this.clinicTiming,
     required this.gender,
     required this.imageUrl,
     required this.name,
@@ -132,7 +140,8 @@ class Clinic {
       clinicAddress: json['clinicadd'],
       doctorId: json['drId'],
       email: json['email'],
-      experience: json['experience'],
+      about: json['about'],
+      clinicTiming: json['clinicTiming'],
       gender: json['gender'],
       imageUrl: json['imageUrl'],
       name: json['name'],
@@ -141,4 +150,3 @@ class Clinic {
     );
   }
 }
-

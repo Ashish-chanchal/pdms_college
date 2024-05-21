@@ -196,7 +196,15 @@ class PatientProfileView extends StatelessWidget {
                             alignment: Alignment.center,
                             child: CustomButton(
                               onTap: () {
-                                Get.to(() => const UpdateProfilePatient());
+                                Get.to(() =>  UpdateProfilePatient(
+
+                                  username: patient.name,
+                                  age: patient.age,
+                                  phone: patient.phone,
+                                  gender: patient.gender,
+                                  address: patient.address,
+                                  imageUrl: patient.imageUrl,
+                                  ));
                               },
                               buttontext: "Update Profile",
                               widt: 200,

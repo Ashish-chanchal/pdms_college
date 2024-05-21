@@ -37,6 +37,13 @@ class StoreAppointment {
         .get();
     return appointments;
   }
+  Future<QuerySnapshot<Map<String, dynamic>>> getAppointmentDocList() async {
+    var appointments = await FirebaseFirestore.instance
+        .collection('appointment')
+        .where('docUid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    return appointments;
+  }
 
   Future<Doctors> getDoctorDetails(String docUid) async {
     DocumentSnapshot<Map<String, dynamic>> snapshot =
@@ -51,7 +58,6 @@ class Doctors {
   final String clinicAddress;
   final String drId;
   final String email;
-  final String experience;
   final String gender;
   final String imageUrl;
   final String name;
@@ -63,7 +69,7 @@ class Doctors {
     required this.clinicAddress,
     required this.drId,
     required this.email,
-    required this.experience,
+
     required this.gender,
     required this.imageUrl,
     required this.name,
@@ -77,7 +83,7 @@ class Doctors {
       clinicAddress: json['clinicadd'],
       drId: json['drId'],
       email: json['email'],
-      experience: json['experience'],
+
       gender: json['gender'],
       imageUrl: json['imageUrl'],
       name: json['name'],

@@ -1,19 +1,68 @@
+import 'dart:typed_data';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
+import 'package:pdms/resources/auth_user.dart';
+import 'package:pdms/utils/utils.dart';
 
-class UpdateProfilePatient extends StatelessWidget {
-  const UpdateProfilePatient({super.key});
+class UpdateProfilePatient extends StatefulWidget {
+  final String username;
+  final String age;
+  final String gender;
+  final String address;
+  final String phone;
+  final imageUrl;
 
+  const UpdateProfilePatient(
+      {super.key,
+      required this.username,
+      required this.age,
+      required this.address,
+      required this.gender,
+      required this.phone,
+      required this.imageUrl
+      });
+  @override
+  State<UpdateProfilePatient> createState() => _UpdateProfilePatientState();
+}
+
+class _UpdateProfilePatientState extends State<UpdateProfilePatient> {
   @override
   Widget build(BuildContext context) {
+   
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController ageController = TextEditingController();
+    final TextEditingController genderController = TextEditingController();
+    final TextEditingController addressController = TextEditingController();
+    final TextEditingController phonenoController = TextEditingController();
+    nameController.text = widget.username;
+    ageController.text = "Age";
+    genderController.text = 'male';
+    addressController.text = 'Address';
+    phonenoController.text = '1234567890';
+   
+
+    updateUserIn() {
+      StoreData().updateUser(
+        name: nameController.text,
+        age: ageController.text,
+        gender: genderController.text,
+        address: addressController.text,
+        phone: phonenoController.text,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Update Profile', style: TextStyle(color: AppColors.whiteColor)),
+        title: Text('Update Profile',
+            style: TextStyle(color: AppColors.whiteColor)),
         backgroundColor: AppColors.primaryColor,
       ),
-      body:SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           SizedBox(
             child: Container(
@@ -31,79 +80,58 @@ class UpdateProfilePatient extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     10.heightBox,
-                    
                     Container(
-          width: 120,
-          height: 120,
-          clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-          ),
-          child: Image.asset(
-            AppAssets.profile,
-            fit: BoxFit.cover,
-          ),
-        ),
-        10.heightBox,
-        Container(
-                  width: 300,
-                  alignment: Alignment.center,
-                   child: GestureDetector(
-                     child: Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Icon(Icons.upload, size: 40, color: AppColors.primaryColor),
-                      AppStyles.normal(title: AppStrings.uyp, size: AppSize.size14, color: AppColors.primaryColor)
-                      
-                      ],
-                     ),
-                     onTap: () {
-                      
-                     },
-                   ),
-                 ),
-                 10.heightBox,
+                      width: 120,
+                      height: 120,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.network(
+                        widget.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    10.heightBox,
+
+                    10.heightBox,
                     CustomTextField(
                       hint: AppStrings.name,
+                      textcontroller: nameController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.age,
+                      textcontroller: ageController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.gender,
+                      textcontroller: genderController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.address,
-                      textColor: AppColors.primaryColor,
-                    ),
-                    10.heightBox,
-                    CustomTextField(
-                      hint: AppStrings.email,
+                      textcontroller: addressController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.phoneno,
+                      textcontroller: phonenoController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
-                   
                     CustomButton(
                       onTap: () {
-                        
+                        updateUserIn();
                       },
                       buttontext: "Update",
                       widt: 200,
                     ),
-                    
-                    
-                   
-                    
                   ],
                 ),
               ),

@@ -1,4 +1,3 @@
-
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
@@ -80,24 +79,23 @@ class _PatientLoginViewState extends State<PatientLoginView> {
                   ),
                   10.heightBox,
                   CustomButton(
-                      onTap: () {
+                      onTap: () async {
                         if (emailController.text.isEmpty ||
                             passwordController.text.isEmpty) {
-                          Get.snackbar("Error", "Please fill all the fields",colorText: AppColors.whiteColor);
+                          Get.snackbar("Error", "Please fill all the fields",
+                              colorText: AppColors.whiteColor);
                           return;
                         } else {
-                          StoreData().loginUser(
-                              email: emailController.text,
-                              password: passwordController.text);
+                          try {
+                            await StoreData().loginUser(
+                                email: emailController.text,
+                                password: passwordController.text);
+                            Get.offAll(() => const BottomNavPatView());
+                          } catch (e) {
+                            Get.snackbar("Error", "Invalid Email or Password",
+                                colorText: AppColors.whiteColor);
+                          }
                         }
-                        if(userCredential!=null){
-                           Get.offAll(() => const BottomNavPatView(),
-                              transition: Transition.rightToLeftWithFade,
-                              duration: const Duration(milliseconds: 1000));
-                        }
-                         else{
-                          Get.snackbar("Error", "Invalid Email or Password" ,colorText: AppColors.whiteColor);
-                         }
                       },
                       buttontext: "Login"),
                   10.heightBox,
@@ -106,12 +104,6 @@ class _PatientLoginViewState extends State<PatientLoginView> {
                     Text("OR"),
                     Expanded(child: Divider()),
                   ]),
-                  10.heightBox,
-                  CustomButton(
-                    onTap: () {},
-                    buttontext: "Login with Google",
-                    widt: 200,
-                  ),
                   10.heightBox,
                   CustomButton(
                     onTap: () {

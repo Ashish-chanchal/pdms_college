@@ -4,20 +4,54 @@ import 'package:pdms/consts/consts.dart';
 
 import 'package:pdms/views/bookappointment_view/bookappointment_view.dart';
 
-class DoctoreProfileptView extends StatelessWidget {
+class DoctoreProfileptView extends StatefulWidget {
   final bool isbooked;
-   final DocumentSnapshot doc;
+  final DocumentSnapshot doc;
 
-  const DoctoreProfileptView({super.key, this.isbooked = false, required this.doc});
+  const DoctoreProfileptView(
+      {super.key, this.isbooked = false, required this.doc});
+
+  @override
+  State<DoctoreProfileptView> createState() => _DoctoreProfileptViewState();
+}
+
+class _DoctoreProfileptViewState extends State<DoctoreProfileptView> {
+  Uri? dialnumber;
+  Uri? emailLaunchUri;
+  callnumber() async {
+    await launchUrl(dialnumber!);
+  }
+
+// ···
+  
+
+  sendmail() async {
+    await launchUrl(emailLaunchUri!);
+  }
+
+void launchMap(String address) async {
+  String query = Uri.encodeComponent(address);
+  String googleUrl = "https://www.google.com/maps/search/?api=1&query=$query";
+
+  
+    await launchUrl(Uri.parse(googleUrl));
+
+}
 
   @override
   Widget build(BuildContext context) {
+   dialnumber = Uri(scheme: 'tel', path: widget.doc['phone']);
+emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: widget.doc['email'],
+    
+  );
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
           backgroundColor: AppColors.primaryColor,
           title: AppStyles.normal(
-              title: "Dr ${doc['name']}",
+              title: "Dr ${widget.doc['name']}",
               size: AppSize.size22,
               color: AppColors.whiteColor),
         ),
@@ -32,18 +66,18 @@ class DoctoreProfileptView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                     Container(
-                                width: 150,
-                                height: 150,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.network(
-                                  doc['imageUrl'],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                    Container(
+                      width: 150,
+                      height: 150,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.network(
+                        widget.doc['imageUrl'],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     10.heightBox,
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +87,7 @@ class DoctoreProfileptView extends StatelessWidget {
                             size: AppSize.size18,
                             color: AppColors.primaryColor),
                         AppStyles.normal(
-                            title: doc['name'],
+                            title: widget.doc['name'],
                             size: AppSize.size18,
                             color: AppColors.primaryColor),
                         AppStyles.bold(
@@ -61,7 +95,7 @@ class DoctoreProfileptView extends StatelessWidget {
                             size: AppSize.size16,
                             color: AppColors.primaryColor),
                         AppStyles.normal(
-                            title: doc['category'],
+                            title: widget.doc['category'],
                             size: AppSize.size16,
                             color: AppColors.primaryColor),
                       ],
@@ -70,13 +104,15 @@ class DoctoreProfileptView extends StatelessWidget {
                 ),
                 10.heightBox,
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    callnumber();
+                  },
                   title: AppStyles.bold(
                       title: "Phone Number",
                       size: AppSize.size14,
                       color: AppColors.textColor),
                   subtitle: AppStyles.normal(
-                    title: doc['phone'],
+                    title: widget.doc['phone'],
                     size: AppSize.size12,
                     color: AppColors.textColor.withOpacity(0.5),
                   ),
@@ -94,13 +130,15 @@ class DoctoreProfileptView extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    sendmail();
+                  },
                   title: AppStyles.bold(
                       title: "Email",
                       size: AppSize.size14,
                       color: AppColors.textColor),
                   subtitle: AppStyles.normal(
-                    title: doc['email'],
+                    title: widget.doc['email'],
                     size: AppSize.size12,
                     color: AppColors.textColor.withOpacity(0.5),
                   ),
@@ -118,13 +156,15 @@ class DoctoreProfileptView extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    launchMap( widget.doc['clinicadd']);
+                  },
                   title: AppStyles.bold(
                       title: "Location",
                       size: AppSize.size14,
                       color: AppColors.textColor),
                   subtitle: AppStyles.normal(
-                    title: doc['clinicadd'],
+                    title: widget.doc['clinicadd'],
                     size: AppSize.size12,
                     color: AppColors.textColor.withOpacity(0.5),
                   ),
@@ -154,7 +194,7 @@ class DoctoreProfileptView extends StatelessWidget {
                           color: AppColors.textColor),
                       10.heightBox,
                       AppStyles.normal(
-                          title: "About Doctor",
+                          title: widget.doc['about'],
                           size: AppSize.size14,
                           color: AppColors.textColor),
                       10.heightBox,
@@ -164,7 +204,7 @@ class DoctoreProfileptView extends StatelessWidget {
                           color: AppColors.textColor),
                       10.heightBox,
                       AppStyles.normal(
-                          title: "Timing",
+                          title: widget.doc['clinicTiming'],
                           size: AppSize.size14,
                           color: AppColors.textColor),
                     ],
@@ -177,15 +217,23 @@ class DoctoreProfileptView extends StatelessWidget {
                     alignment: Alignment.center,
                     child: CustomButton(
                       onTap: () {
-                        if (!isbooked){
-                          print(doc['drId']);
-                        Get.to(() =>  BookAppointmentView(docUid:doc['userId']));
-                        }
-                        else{
-                          Get.snackbar("Already Booked", "You have already booked an appointment", snackPosition: SnackPosition.BOTTOM, backgroundColor: AppColors.primaryColor, colorText: AppColors.whiteColor, margin: const EdgeInsets.all(20), borderRadius: 10, duration: const Duration(seconds: 5));
+                        if (!widget.isbooked) {
+                          Get.to(() => BookAppointmentView(
+                              docUid: widget.doc['userId']));
+                        } else {
+                          Get.snackbar("Already Booked",
+                              "You have already booked an appointment",
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: AppColors.primaryColor,
+                              colorText: AppColors.whiteColor,
+                              margin: const EdgeInsets.all(20),
+                              borderRadius: 10,
+                              duration: const Duration(seconds: 5));
                         }
                       },
-                      buttontext: !isbooked ?"Book Appointment":"Already Booked",
+                      buttontext: !widget.isbooked
+                          ? "Book Appointment"
+                          : "Already Booked",
                       widt: 200,
                     )),
               ],

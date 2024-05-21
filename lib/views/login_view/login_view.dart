@@ -35,28 +35,28 @@ class LoginView extends StatelessWidget {
                    AppStyles.bold(title: AppStrings.loginas,size: AppSize.size34 ,color: AppColors.primaryColor),
                    10.heightBox,
                    Container(
-                    width: 300,
+                    
                     alignment: Alignment.center,
                      child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [Image.asset(AppAssets.doclogo, height: 40, width: 40),
+                      children: [Image.asset(AppAssets.doclogo, height: 70, width: 70),
                       CustomButton(onTap: (){
                         Get.to( const DoctorLoginView(),transition: Transition.rightToLeftWithFade , duration: const Duration(milliseconds: 1000));
-                      }, buttontext: "Doctor")],
+                      }, buttontext: "Doctor" ,widt: 200,)],
                      ),
                    ),
                    10.heightBox,
                    Container(
-                    width: 300,
+                    
                     alignment: Alignment.center,
                      child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [Image.asset(AppAssets.patientlogo, height: 50, width: 50),
+                      children: [Image.asset(AppAssets.patientlogo, height: 70, width: 70),
                       CustomButton(onTap: (){
                          Get.to(const PatientLoginView(),transition: Transition.rightToLeftWithFade , duration: const Duration(milliseconds: 1000));
-                      }, buttontext: "Patient")],
+                      }, buttontext: "Patient",widt: 200,)],
                      ),
                    ),
                   

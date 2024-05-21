@@ -6,6 +6,7 @@ import "package:firebase_storage/firebase_storage.dart";
 import "package:flutter/foundation.dart";
 import "package:pdms/consts/consts.dart";
 import "package:pdms/views/login_view/patient_login_view.dart";
+import "package:pdms/views/profile_view/patient_profile_view.dart";
 
 final FirebaseStorage _storage = FirebaseStorage.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -27,7 +28,7 @@ class StoreData {
     return downloadUrl;
   }
 
-  Future<String>signupUser(
+  Future<String> signupUser(
       {required String name,
       required String age,
       required String gender,
@@ -75,24 +76,64 @@ class StoreData {
     return "Success";
   }
 
-
-    loginUser({required email,required password}) async {
-
-    userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email, password: password);
+  loginUser({required email, required password}) async {
+    userCredential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
   }
-   signout() async {
+
+  signout() async {
     await FirebaseAuth.instance.signOut();
     Get.off(() => const PatientLoginView());
   }
-  Future<Patient> getPatientData() async {
-  DocumentSnapshot<Map<String, dynamic>> snapshot =
-      await FirebaseFirestore.instance.collection('users').doc(userCredential!.user!.uid).get();
 
-  Map<String, dynamic> data = snapshot.data()!;
-  return Patient.fromJson(data);
+  Future<Patient> getPatientData() async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('users')
+        .doc(userCredential!.user!.uid)
+        .get();
+
+    Map<String, dynamic> data = snapshot.data()!;
+    return Patient.fromJson(data);
+  }
+  void updateUserInfo( Map<String, dynamic> userData) async {
+    try {
+      // Get reference to the Firestore database
+      final firestore = FirebaseFirestore.instance;
+
+      // Reference to the user's document
+      final userDocRef = firestore.collection('users').doc(FirebaseAuth.instance.currentUser!.uid);
+
+      // Update the document with the new data
+      await userDocRef.update(userData);
+      Get.back();
+
+      print('User profile updated successfully!');
+    } catch (e) {
+      print('Error updating user profile: $e');
+    }
+  }
+
+  // Call this function when the user taps the update button
+  void updateUser({
+     required String name,required String age,required String gender,required String address,required String phone,
+  }) async {
+  
+    // Assuming this is the user's ID
+    Map<String, dynamic> userData = {
+      'name': name,
+      'age': age,
+      'gender': gender,
+      'address': address,
+      'phone': phone,
+      
+  
+    };
+
+    updateUserInfo( userData);
+  }
 }
-}
+
 class Patient {
   final String address;
   final String age;
@@ -126,5 +167,6 @@ class Patient {
       userId: json['userId'],
     );
   }
-}
 
+  
+}

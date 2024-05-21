@@ -6,12 +6,15 @@ import 'package:pdms/views/category_view/category_detail_view.dart';
 import 'package:pdms/views/category_view/category_view.dart';
 import 'package:pdms/views/doctors_view/doctors_view.dart';
 import 'package:pdms/views/profile_view/doctor_profile_ptview.dart';
+import 'package:pdms/views/search_view/search_ptview.dart';
 
 class HomePatientView extends StatelessWidget {
+  
   const HomePatientView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController searchController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title:
@@ -29,7 +32,8 @@ class HomePatientView extends StatelessWidget {
                   children: [
                     Expanded(
                       child: CustomTextField(
-                        hint: "Search Patient",
+                        hint: "Search Doctor",
+                        textcontroller: searchController,
                         textColor: AppColors.whiteColor,
                         inputColor: AppColors.whiteColor,
                         borderColor: AppColors.whiteColor,
@@ -37,7 +41,9 @@ class HomePatientView extends StatelessWidget {
                     ),
                     10.widthBox,
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() =>  SearchPtView( searchQuery: searchController.text));
+                        },
                         icon: Icon(Icons.search, color: AppColors.whiteColor))
                   ],
                 )),

@@ -186,7 +186,7 @@ class _DoctoreProfileViewState extends State<DoctoreProfileView> {
                                     color: AppColors.textColor),
                                 10.heightBox,
                                 AppStyles.normal(
-                                    title: "About Doctor",
+                                    title: docdata.about,
                                     size: AppSize.size14,
                                     color: AppColors.textColor),
                                 10.heightBox,
@@ -196,7 +196,7 @@ class _DoctoreProfileViewState extends State<DoctoreProfileView> {
                                     color: AppColors.textColor),
                                 10.heightBox,
                                 AppStyles.normal(
-                                    title: "Timing",
+                                    title: docdata.clinicTiming,
                                     size: AppSize.size14,
                                     color: AppColors.textColor),
                               ],

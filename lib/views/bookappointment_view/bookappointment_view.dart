@@ -1,7 +1,7 @@
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
-
+import 'package:pdms/views/bottem_nav_view/bottem_navpat_view.dart';
 
 import '../../resources/store_appointment.dart';
 
@@ -11,7 +11,6 @@ class BookAppointmentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final TextEditingController nameController = TextEditingController();
     final TextEditingController problemController = TextEditingController();
 
@@ -53,8 +52,8 @@ class BookAppointmentView extends StatelessWidget {
                   height: 50,
                   alignment: Alignment.center,
                   child: CustomButton(
-                    onTap: () {
-                      var status = StoreAppointment().BookAppointment(
+                    onTap: () async {
+                      var status = await StoreAppointment().BookAppointment(
                           name: nameController.text,
                           problem: problemController.text,
                           docUid: docUid);
@@ -66,6 +65,7 @@ class BookAppointmentView extends StatelessWidget {
                           margin: const EdgeInsets.all(20),
                           borderRadius: 10,
                           duration: const Duration(seconds: 3));
+                      Get.to(() => const BottomNavPatView());
                     },
                     buttontext: "Book Appointment",
                     widt: 200,

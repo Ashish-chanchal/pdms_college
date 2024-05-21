@@ -21,7 +21,7 @@ class DoctorSignupView extends StatefulWidget {
 class _DoctorSignupViewState extends State<DoctorSignupView> {
   Uint8List? _image;
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController experienceController = TextEditingController();
+
   final TextEditingController genderController = TextEditingController();
   final TextEditingController clinicController = TextEditingController();
   final TextEditingController drIdController = TextEditingController();
@@ -29,11 +29,12 @@ class _DoctorSignupViewState extends State<DoctorSignupView> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phonenoController = TextEditingController();
+  final TextEditingController aboutController = TextEditingController();
+  final TextEditingController clinicTimingController = TextEditingController();
 
   void regsiterUser() async {
     String stats = await StoreDocData().signupdoctor(
         name: nameController.text,
-        exp: experienceController.text,
         gender: genderController.text,
         clinicadd: clinicController.text,
         drId: drIdController.text,
@@ -41,6 +42,8 @@ class _DoctorSignupViewState extends State<DoctorSignupView> {
         email: emailController.text,
         password: passwordController.text,
         phone: phonenoController.text,
+        about : aboutController.text,
+        clinicTiming: clinicTimingController.text,
         file: _image!
     );
     if (stats == "Success") {
@@ -73,6 +76,7 @@ class _DoctorSignupViewState extends State<DoctorSignupView> {
         backgroundColor: AppColors.primaryColor,
       ),
       body: SingleChildScrollView(
+       
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           SizedBox(
             child: Container(
@@ -89,7 +93,7 @@ class _DoctorSignupViewState extends State<DoctorSignupView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    10.heightBox,
+                    5.heightBox,
                     _image != null
                         ? CircleAvatar(
                             radius: 60, backgroundImage: MemoryImage(_image!))
@@ -105,7 +109,7 @@ class _DoctorSignupViewState extends State<DoctorSignupView> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                    10.heightBox,
+                    5.heightBox,
                     Container(
                       width: 300,
                       alignment: Alignment.center,
@@ -126,61 +130,68 @@ class _DoctorSignupViewState extends State<DoctorSignupView> {
                         ),
                       ),
                     ),
-                    10.heightBox,
+                    5.heightBox,
                     CustomTextField(
                       textcontroller: nameController,
                       hint: AppStrings.name,
                       textColor: AppColors.primaryColor,
                     ),
-                    10.heightBox,
-                    CustomTextField(
-                      textcontroller: experienceController,
-                      hint: AppStrings.experience,
-                      textColor: AppColors.primaryColor,
-                    ),
-                    10.heightBox,
+
+                    5.heightBox,
                     CustomTextField(
                       textcontroller: genderController,
                       hint: AppStrings.gender,
                       textColor: AppColors.primaryColor,
                     ),
-                    10.heightBox,
+                    5.heightBox,
                     CustomTextField(
                       textcontroller: clinicController,
                       hint: AppStrings.clinic,
                       textColor: AppColors.primaryColor,
                     ),
-                    10.heightBox,
+                    5.heightBox,
                     CustomTextField(
                       textcontroller: drIdController,
                       hint: AppStrings.drId,
                       textColor: AppColors.primaryColor,
                     ),
-                    10.heightBox,
+                    5.heightBox,
                     CustomTextField(
                       textcontroller: categoryController,
                       hint: "Category",
                       textColor: AppColors.primaryColor,
                     ),
-                    10.heightBox,
+                    5.heightBox,
                     CustomTextField(
                       textcontroller: emailController,
                       hint: AppStrings.email,
                       textColor: AppColors.primaryColor,
                     ),
-                    10.heightBox,
+                    5.heightBox,
                     CustomTextField(
                       textcontroller: passwordController,
                       hint: AppStrings.password,
                       textColor: AppColors.primaryColor,
                     ),
-                    10.heightBox,
+                    5.heightBox,
                     CustomTextField(
                       textcontroller: phonenoController,
                       hint: AppStrings.phoneno,
                       textColor: AppColors.primaryColor,
                     ),
-                    10.heightBox,
+                    5.heightBox,
+                    CustomTextField(
+                      textcontroller: aboutController,
+                      hint: "About",
+                      textColor: AppColors.primaryColor,
+                    ),
+                    5.heightBox,
+                    CustomTextField(
+                      textcontroller: clinicTimingController,
+                      hint: "Clinic Timing",
+                      textColor: AppColors.primaryColor,
+                    ),
+                    5.heightBox,
                     CustomButton(
                       onTap: () {
                         regsiterUser();
@@ -188,13 +199,13 @@ class _DoctorSignupViewState extends State<DoctorSignupView> {
                       buttontext: AppStrings.signup,
                       widt: 200,
                     ),
-                    10.heightBox,
+                    5.heightBox,
                     const Row(children: <Widget>[
                       Expanded(child: Divider()),
                       Text("Aleady have an account?"),
                       Expanded(child: Divider()),
                     ]),
-                    10.heightBox,
+                    5.heightBox,
                     CustomButton(
                         onTap: () {
                          Get.to( const DoctorLoginView());

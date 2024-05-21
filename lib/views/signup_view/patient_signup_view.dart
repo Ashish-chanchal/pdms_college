@@ -46,7 +46,8 @@ class _PatientSignupViewState extends State<PatientSignupView> {
         email: emailController.text,
         password: passwordController.text,
         phone: phonenoController.text,
-        file: _image!);
+        file: _image!
+        );
 
     if (stat == "Success") {
       context.showToast(msg: "User Registration Successfull");
