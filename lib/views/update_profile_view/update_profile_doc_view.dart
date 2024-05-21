@@ -1,16 +1,78 @@
-
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
+import 'package:pdms/resources/auth_doctor.dart';
 
-class UpdateProfileDocView extends StatelessWidget {
-  const UpdateProfileDocView({super.key});
+class UpdateProfileDocView extends StatefulWidget {
+  final String name;
+  final String email;
+  final String phone;
+  final String category;
+  final String clinicAddress;
+  final String about;
+  final String clinicTiming;
+  final String imageUrl;
+  final String gender;
+  final String drId;
+  const UpdateProfileDocView(
+      {super.key,
+      required this.name,
+      required this.email,
+      required this.phone,
+      required this.category,
+      required this.clinicAddress,
+      required this.about,
+      required this.clinicTiming,
+      required this.imageUrl,
+      required this.gender,
+      required this.drId});
+
+  @override
+  State<UpdateProfileDocView> createState() => _UpdateProfileDocViewState();
+}
+
+class _UpdateProfileDocViewState extends State<UpdateProfileDocView> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController clinicAddressController = TextEditingController();
+  final TextEditingController aboutController = TextEditingController();
+  final TextEditingController clinicTimingController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
+  final TextEditingController drIdController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    nameController.text = widget.name;
+    emailController.text = widget.email;
+    phoneController.text = widget.phone;
+    categoryController.text = widget.category;
+    clinicAddressController.text = widget.clinicAddress;
+    aboutController.text = widget.about;
+    clinicTimingController.text = widget.clinicTiming;
+    drIdController.text = widget.drId;
+    genderController.text = widget.gender;
+
+
+    updateProfile(){
+      StoreDocData().updateDoc(
+        name: nameController.text,
+        email: emailController.text,
+        phone: phoneController.text,
+        category: categoryController.text,
+        clinicAddress: clinicAddressController.text,
+        about: aboutController.text,
+        clinicTiming: clinicTimingController.text,
+        gender: genderController.text,
+        drId: drIdController.text
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Update Profile', style: TextStyle(color: AppColors.whiteColor)),
+        title: Text('Update Profile',
+            style: TextStyle(color: AppColors.whiteColor)),
         backgroundColor: AppColors.primaryColor,
       ),
       body: SingleChildScrollView(
@@ -37,74 +99,75 @@ class UpdateProfileDocView extends StatelessWidget {
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: Image.asset(
-                        AppAssets.profile,
+                      child: Image.network(
+                        widget.imageUrl,
                         fit: BoxFit.cover,
                       ),
                     ),
                     10.heightBox,
-                    Container(
-                      width: 300,
-                      alignment: Alignment.center,
-                      child: GestureDetector(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.upload,
-                                size: 40, color: AppColors.primaryColor),
-                           AppStyles.normal(title: AppStrings.uyp, size: AppSize.size14, color: AppColors.primaryColor)
-                          ],
-                        ),
-                        onTap: () {},
-                      ),
-                    ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.name,
+                      textcontroller: nameController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
-                    CustomTextField(
-                      hint: AppStrings.experience,
-                      textColor: AppColors.primaryColor,
-                    ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.gender,
+                      textcontroller: genderController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.clinic,
+                      textcontroller: clinicAddressController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.drId,
+                      textcontroller: drIdController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomTextField(
                       hint: "Category",
+                      textcontroller: categoryController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.email,
+                      textcontroller: emailController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomTextField(
                       hint: AppStrings.phoneno,
+                      textcontroller: phoneController,
+                      textColor: AppColors.primaryColor,
+                    ),
+                    10.heightBox,
+                    CustomTextField(
+                      hint: "about",
+                      textcontroller: aboutController,
+                      textColor: AppColors.primaryColor,
+                    ),
+                    10.heightBox,
+                    CustomTextField(
+                      hint: "Clinic Timing",
+                      textcontroller: clinicTimingController,
                       textColor: AppColors.primaryColor,
                     ),
                     10.heightBox,
                     CustomButton(
-                      onTap: () {},
+                      onTap: () {
+                        updateProfile();
+                      },
                       buttontext: "Update",
                       widt: 200,
                     ),
-                   
                   ],
                 ),
               ),

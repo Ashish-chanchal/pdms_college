@@ -6,7 +6,7 @@ import "package:firebase_storage/firebase_storage.dart";
 import "package:flutter/foundation.dart";
 import "package:pdms/consts/consts.dart";
 import "package:pdms/views/login_view/patient_login_view.dart";
-import "package:pdms/views/profile_view/patient_profile_view.dart";
+
 
 final FirebaseStorage _storage = FirebaseStorage.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -91,6 +91,16 @@ class StoreData {
         .instance
         .collection('users')
         .doc(userCredential!.user!.uid)
+        .get();
+
+    Map<String, dynamic> data = snapshot.data()!;
+    return Patient.fromJson(data);
+  }
+  Future<Patient> getUserDetails(String uid) async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('users')
+        .doc(uid)
         .get();
 
     Map<String, dynamic> data = snapshot.data()!;

@@ -209,7 +209,19 @@ class _DoctoreProfileViewState extends State<DoctoreProfileView> {
                               alignment: Alignment.center,
                               child: CustomButton(
                                 onTap: () {
-                                  Get.to(() => const UpdateProfileDocView());
+                                  Get.to(() =>  UpdateProfileDocView(
+                                    
+                                      name: docdata.name,
+                                      email: docdata.email,
+                                      phone: docdata.phone,
+                                      category: docdata.category,
+                                      about: docdata.about,
+                                      clinicAddress: docdata.clinicAddress,
+                                      clinicTiming: docdata.clinicTiming,
+                                      imageUrl: docdata.imageUrl,
+                                      gender: docdata.gender,
+                                      drId: docdata.drId,
+                                  ));
                                 },
                                 buttontext: "Update Profile",
                               )),

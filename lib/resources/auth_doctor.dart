@@ -1,3 +1,4 @@
+import "dart:async";
 import "dart:typed_data";
 
 import "package:cloud_firestore/cloud_firestore.dart";
@@ -105,6 +106,66 @@ class StoreDocData {
     Map<String, dynamic> data = snapshot.data()!;
     return Clinic.fromJson(data);
   }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getAppointmentDocListByDoctor(
+      String patuid) async {
+    var appointments = await FirebaseFirestore.instance
+        .collection('appointment')
+        .where('docUid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('patUid', isEqualTo: patuid)
+        .limit(1)
+        .get();
+
+    return appointments;
+  }
+
+  void updateDocInfo(Map<String, dynamic> userData) async {
+    try {
+      // Get reference to the Firestore database
+      final firestore = FirebaseFirestore.instance;
+
+      // Reference to the user's document
+      final userDocRef = firestore
+          .collection('doctor')
+          .doc(FirebaseAuth.instance.currentUser!.uid);
+
+      // Update the document with the new data
+      await userDocRef.update(userData);
+      Get.back();
+
+      print('User profile updated successfully!');
+    } catch (e) {
+      print('Error updating user profile: $e');
+    }
+  }
+
+  // Call this function when the user taps the update button
+  void updateDoc({
+    required String name,
+    required String email,
+    required String phone,
+    required String category,
+    required String clinicAddress,
+    required String about,
+    required String clinicTiming,
+    required String drId ,
+    required  String gender
+  }) async {
+    // Assuming this is the user's ID
+    Map<String, dynamic> userData = {
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'category': category,
+      'clinicadd': clinicAddress,
+      'drId': drId,
+      'about': about,
+      'clinicTiming': clinicTiming,
+      'gender':gender
+    };
+
+    updateDocInfo(userData);
+  }
 }
 
 class Clinic {
@@ -113,6 +174,7 @@ class Clinic {
   final String doctorId;
   final String email;
   final String about;
+  final String drId;
   final String clinicTiming;
   final String gender;
   final String imageUrl;
@@ -132,6 +194,7 @@ class Clinic {
     required this.name,
     required this.phone,
     required this.userId,
+    required this.drId,
   });
 
   factory Clinic.fromJson(Map<String, dynamic> json) {
@@ -141,6 +204,7 @@ class Clinic {
       doctorId: json['drId'],
       email: json['email'],
       about: json['about'],
+      drId: json['drId'],
       clinicTiming: json['clinicTiming'],
       gender: json['gender'],
       imageUrl: json['imageUrl'],

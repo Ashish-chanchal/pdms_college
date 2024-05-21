@@ -37,13 +37,44 @@ class StoreAppointment {
         .get();
     return appointments;
   }
-  Future<QuerySnapshot<Map<String, dynamic>>> getAppointmentDocList() async {
-    var appointments = await FirebaseFirestore.instance
-        .collection('appointment')
-        .where('docUid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .get();
-    return appointments;
-  }
+  // Future<QuerySnapshot<Map<String, dynamic>>> getAppointmentDocList() async {
+  //   var appointments = await FirebaseFirestore.instance
+  //       .collection('appointment')
+  //       .where('docUid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+  //       .get();
+  //   return appointments;
+  // }
+Future<QuerySnapshot<Map<String, dynamic>>> getAppointmentDocList() async {
+  var today = DateTime.now();
+  
+  // Format today's date to match the format in the Firestore documents
+  var formattedToday = DateTime(today.year, today.month, today.day).toString().substring(0,10);
+  print(formattedToday);
+  var appointments = await FirebaseFirestore.instance
+      .collection('appointment')
+      .where('docUid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .where('dateTime', isEqualTo: formattedToday)
+      .get();
+  
+  return appointments;
+}
+
+Future<QuerySnapshot<Map<String, dynamic>>> getPastAppointmentDocList() async {
+  // Get the current date and time
+   var today = DateTime.now();
+  
+  // Format today's date to match the format in the Firestore documents
+  var formattedToday = DateTime(today.year, today.month, today.day).toString().substring(0,10);
+  // Fetch appointments for the current user where the date is before today
+  var appointments = await FirebaseFirestore.instance
+      .collection('appointment')
+      .where('docUid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .where('dateTime', isLessThan: formattedToday) // Assuming the date field is stored as a Firestore Timestamp
+      .get();
+
+  return appointments;
+}
+
 
   Future<Doctors> getDoctorDetails(String docUid) async {
     DocumentSnapshot<Map<String, dynamic>> snapshot =

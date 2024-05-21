@@ -1,13 +1,9 @@
-import 'dart:typed_data';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/resources/auth_user.dart';
-import 'package:pdms/utils/utils.dart';
+
 
 class UpdateProfilePatient extends StatefulWidget {
   final String username;
@@ -15,6 +11,7 @@ class UpdateProfilePatient extends StatefulWidget {
   final String gender;
   final String address;
   final String phone;
+  // ignore: prefer_typing_uninitialized_variables
   final imageUrl;
 
   const UpdateProfilePatient(
@@ -40,10 +37,10 @@ class _UpdateProfilePatientState extends State<UpdateProfilePatient> {
     final TextEditingController addressController = TextEditingController();
     final TextEditingController phonenoController = TextEditingController();
     nameController.text = widget.username;
-    ageController.text = "Age";
-    genderController.text = 'male';
-    addressController.text = 'Address';
-    phonenoController.text = '1234567890';
+    ageController.text = widget.age;
+    genderController.text = widget.gender;
+    addressController.text = widget.address;
+    phonenoController.text = widget.phone;
    
 
     updateUserIn() {
