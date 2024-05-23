@@ -21,7 +21,7 @@ class StoreAppointment {
         'problem': problem,
         'docUid': docUid,
         'patUid': FirebaseAuth.instance.currentUser!.uid,
-        'dateTime': DateTime.now().toString(),
+        'dateTime': DateTime.now().toString().substring(0,10),
       });
     } catch (e) {
       print(e);
@@ -49,7 +49,7 @@ Future<QuerySnapshot<Map<String, dynamic>>> getAppointmentDocList() async {
   
   // Format today's date to match the format in the Firestore documents
   var formattedToday = DateTime(today.year, today.month, today.day).toString().substring(0,10);
-  print(formattedToday);
+
   var appointments = await FirebaseFirestore.instance
       .collection('appointment')
       .where('docUid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)

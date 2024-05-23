@@ -63,8 +63,9 @@ class CategoryDetailsView extends StatelessWidget {
                                   alignment: Alignment.center,
                                   child: Image.network(
                                     data![index]['imageUrl'],
+                                    fit: BoxFit.cover,
                                     width: 100,
-                                    height: 120,
+                                    height: 100,
                                   ),
                                 ),
                                 10.heightBox,

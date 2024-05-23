@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "675164500489",
-    "project_id": "test-67415",
-    "storage_bucket": "test-67415.appspot.com"
+    "project_number": "271737016887",
+    "project_id": "test-a488c",
+    "storage_bucket": "test-a488c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:675164500489:android:4dd2ea5077cd6b02e5fed8",
+        "mobilesdk_app_id": "1:271737016887:android:b3a11ced3bde70485265b2",
         "android_client_info": {
           "package_name": "com.example.pdms"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBBmmg3mGKB4IyAeXaaC9Mxqm8TIHdqA2A"
+          "current_key": "AIzaSyAYvLWZzAtoaLK3DBGmUskd8iKIFryPm2c"
         }
       ],
       "services": {

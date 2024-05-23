@@ -2,7 +2,7 @@ import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/resources/forget_passord_auth.dart';
-import 'package:pdms/views/forget_password_view/verify_otp_view.dart';
+
 import 'package:pdms/views/login_view/login_view.dart';
 
 class ForgetPasswordView extends StatefulWidget {

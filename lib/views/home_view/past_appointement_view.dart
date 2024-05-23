@@ -73,12 +73,18 @@ class PastAppointmentView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Image.network(
-                                doc.imageUrl,
-                                height: 80,
-                                width: 80,
-                                fit: BoxFit.cover,
-                              ),
+                              Container(
+                                        width: 100,
+                                        height: 100,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.network(
+                                          doc.imageUrl,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Column(
