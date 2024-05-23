@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+
 import 'package:pdms/components/custom_testfield.dart';
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/resources/auth_user.dart';
@@ -68,7 +68,7 @@ class PastAppointmentView extends StatelessWidget {
                         width: double.infinity,
                         child: GestureDetector(
                            onTap: (){
-                            Get.to(()=> AppointmentProfileView(uid:data?[index]['patUid'],problem:  data?[index]['problem']));
+                            Get.to(()=> AppointmentProfileView(uid:data?[index]['patUid'],problem:  data?[index]['problem'],dateTime: data?[index]['dateTime']));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,

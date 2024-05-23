@@ -49,7 +49,6 @@ class PatientProfileView extends StatelessWidget {
                   return Text('Error: ${snapshot.error}');
                 } else {
                   Patient patient = snapshot.data!;
-                  print(patient);
                   return SizedBox(
                     width: double.infinity,
                     child: Column(

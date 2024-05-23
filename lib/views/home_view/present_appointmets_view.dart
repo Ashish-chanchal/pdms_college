@@ -72,7 +72,7 @@ class PresentAppointmentView extends StatelessWidget {
                                 child: GestureDetector(
                                   onTap: () {
                                     Get.to(() => AppointmentProfileView(
-                                        uid: data?[index]['patUid'],problem: data?[index]['problem']));
+                                        uid: data?[index]['patUid'],problem: data?[index]['problem'],dateTime: data?[index]['dateTime']));
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,

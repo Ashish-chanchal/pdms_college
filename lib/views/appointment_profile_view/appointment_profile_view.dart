@@ -1,17 +1,24 @@
+import 'package:pdms/components/custom_button.dart';
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/resources/auth_user.dart';
+import 'package:pdms/views/prescription_view/doctor_side_prescription_view.dart';
 
 class AppointmentProfileView extends StatefulWidget {
   final String uid;
   final String problem;
-  const AppointmentProfileView({super.key, required this.uid, required this.problem});
+  final String dateTime;
+  const AppointmentProfileView(
+      {super.key,
+      required this.uid,
+      required this.problem,
+      required this.dateTime});
 
   @override
   State<AppointmentProfileView> createState() => _AppointmentProfileViewState();
 }
 
 class _AppointmentProfileViewState extends State<AppointmentProfileView> {
-    Uri? dialnumber;
+  Uri? dialnumber;
   Uri? emailLaunchUri;
   callnumber(Uri dailnumber) async {
     await launchUrl(dialnumber!);
@@ -27,6 +34,7 @@ class _AppointmentProfileViewState extends State<AppointmentProfileView> {
 
     await launchUrl(Uri.parse(googleUrl));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,18 +64,18 @@ class _AppointmentProfileViewState extends State<AppointmentProfileView> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                              width: 150,
-                              height: 150,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                data!.imageUrl,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            10.heightBox,
+                          width: 150,
+                          height: 150,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.network(
+                            data!.imageUrl,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        10.heightBox,
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -173,7 +181,48 @@ class _AppointmentProfileViewState extends State<AppointmentProfileView> {
                               size: AppSize.size14,
                               color: AppColors.textColor),
                           10.heightBox,
-                          
+                        ],
+                      ),
+                    ),
+                    20.heightBox,
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          10.heightBox,
+                          AppStyles.bold(
+                              title: "Add Prescription",
+                              size: AppSize.size22,
+                              color: AppColors.textColor),
+                          10.heightBox,
+                          widget.dateTime.substring(0,10) == DateTime.now().toString().substring(0,10) ? Row(
+                            children: [
+                              Icon(Icons.upload,
+                                  size: 40, color: AppColors.primaryColor),
+                              AppStyles.normal(
+                                  title: "Upload Prescription",
+                                  size: AppSize.size14,
+                                  color: AppColors.primaryColor),
+                            ],
+                          ):Text("Prescription can be uploaded only on the day of appointment",),
+                          10.heightBox,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                               widget.dateTime.substring(0,10) == DateTime.now().toString().substring(0,10) ?CustomButton(
+                                onTap: () {},
+                                buttontext: "Upload",
+                              ):Text(""),
+                              CustomButton(
+                                onTap: () {
+                                  Get.to(() => const DoctorPresciptionView());
+                                },
+                                buttontext: "View",
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
