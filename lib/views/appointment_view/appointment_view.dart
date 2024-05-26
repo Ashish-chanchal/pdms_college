@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/resources/store_appointment.dart';
+import 'package:pdms/views/prescription_view/patient_side_prescription_view.dart';
 
 
 
@@ -54,9 +55,9 @@ class AppointmentView extends StatelessWidget {
                                 height: 100,
                                 width: double.infinity,
                                 child: GestureDetector(
-                                  // onTap: (){
-                                  //   Get.to(()=> DoctoreProfileptView(isbooked: true,doc: doctorMap));
-                                  // },
+                                  onTap: (){
+                                    Get.to(()=> PatientSidePrescription(docUid: data?[index]['docUid'], patUid: data?[index]['patUid'],date: data?[index]['dateTime'].toString().substring(0, 10)));
+                                  },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [

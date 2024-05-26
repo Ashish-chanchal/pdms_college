@@ -34,6 +34,7 @@ class StoreAppointment {
     var appointments = await FirebaseFirestore.instance
         .collection('appointment')
         .where('patUid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .orderBy( 'dateTime', descending: true)
         .get();
     return appointments;
   }
