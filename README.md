@@ -23,6 +23,19 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 ```
+git clone https://github.com/Ashish-chanchal/pdms_college.git
+```
+```
+Open folder in code editor
+```
+```
+Install Flutter SDK
+```
+```
+flutter pub get
+flutter run
+```
+```
 └── 📁lib
     └── 📁components
         └── custom_button.dart
