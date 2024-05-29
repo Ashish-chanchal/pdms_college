@@ -9,3 +9,6 @@ export './list.dart';
 export 'package:url_launcher/url_launcher.dart';
 
 
+
+const OPENAI_API_KEY =
+    'sk-proj-lBaGEuDiGIcYPmJMOMZhT3BlbkFJQsqAGUrJYxe18zgFxUCc';
