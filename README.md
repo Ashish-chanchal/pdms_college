@@ -22,7 +22,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-
+```
 └── 📁lib
     └── 📁components
         └── custom_button.dart
@@ -95,3 +95,4 @@ samples, guidance on mobile development, and a full API reference.
         └── 📁update_profile_view
             └── update_profile_doc_view.dart
             └── update_profile_patient.dart
+```
