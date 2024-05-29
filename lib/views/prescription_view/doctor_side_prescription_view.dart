@@ -61,12 +61,12 @@ class _DoctorPresciptionViewState extends State<DoctorPresciptionView> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ListTile(
-                    title: Text('Documet Name:', style: TextStyle(fontWeight: FontWeight.bold)),
+                    title: const Text('Documet Name:', style: TextStyle(fontWeight: FontWeight.bold)),
                     subtitle:
                         Text('${ doc['fileName']}'),
                   ),
                       ListTile(
-                    title: Text('Patient problem:', style: TextStyle(fontWeight: FontWeight.bold)),
+                    title: const Text('Patient problem:', style: TextStyle(fontWeight: FontWeight.bold)),
                     subtitle:
                         Text(doc['problem'] ?? 'No problem description'),
                   ),

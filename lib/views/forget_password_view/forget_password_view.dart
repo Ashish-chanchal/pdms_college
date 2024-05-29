@@ -67,7 +67,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   sendLink(emailController.text);
                   Get.to(() => const LoginView());
                 },
-                buttontext: "Send OTP",
+                buttontext: "Send Reset Link",
                 widt: 200,
               ),
             ],

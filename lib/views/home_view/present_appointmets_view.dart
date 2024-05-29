@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pdms/components/custom_testfield.dart';
+
 import 'package:pdms/consts/consts.dart';
 import 'package:pdms/resources/auth_user.dart';
 import 'package:pdms/resources/store_appointment.dart';
@@ -46,7 +46,7 @@ class PresentAppointmentView extends StatelessWidget {
                               }
                               Patient doc = snapshot.data!;
                               return Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
+                                padding: const EdgeInsets.all( 10.0),
                                 child: SizedBox(
                                   height: 100,
                                   width: double.infinity,

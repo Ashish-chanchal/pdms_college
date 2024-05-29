@@ -48,9 +48,9 @@ class _PDFScreenState extends State<PDFScreen> {
               color: AppColors.whiteColor),
         ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _document == null
-              ? Center(child: Text('Error loading PDF'))
+              ? const Center(child: Text('Error loading PDF'))
               : PDFViewer(document: _document!),
     );
   }

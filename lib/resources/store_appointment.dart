@@ -2,14 +2,13 @@
 
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
-import "package:firebase_storage/firebase_storage.dart";
 
 
-final FirebaseStorage _storage = FirebaseStorage.instance;
+
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class StoreAppointment {
-  Future<String> BookAppointment(
+  Future<String> bookAppointment(
       {required String name,
       required String problem,
       required String docUid}) async {

@@ -53,7 +53,7 @@ class BookAppointmentView extends StatelessWidget {
                   alignment: Alignment.center,
                   child: CustomButton(
                     onTap: () async {
-                      var status = await StoreAppointment().BookAppointment(
+                      var status = await StoreAppointment().bookAppointment(
                           name: nameController.text,
                           problem: problemController.text,
                           docUid: docUid);
